@@ -188,7 +188,7 @@ describe("patcher", function() {
         var withFooCall = recast.print(twoLineAST).code;
         assert.strictEqual(withFooCall, [
             "return",
-            "foo()"
+            "foo();"
         ].join("\n"));
     });
 });

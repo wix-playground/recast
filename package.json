@@ -25,10 +25,11 @@
     "debug": "node ./node_modules/mocha/bin/mocha --debug-brk --reporter spec"
   },
   "dependencies": {
+    "ast-types": "~0.7.0",
+    "babel-core": "^5.1.13",
     "esprima-fb": "~14001.1.0-dev-harmony-fb",
-    "source-map": "~0.4.1",
     "private": "~0.1.5",
-    "ast-types": "~0.7.0"
+    "source-map": "~0.4.1"
   },
   "devDependencies": {
     "mocha": "~2.1.0"

@@ -481,7 +481,7 @@ describe("comments", function() {
         var ast = recast.parse(code);
         var array = ast.program.body[0].expression;
         var danglingComment = array.comments[0];
-        var trailingComment = array.comments[1];
+        var trailingComment = array.comments[1] || ast.program.body[0].comments[0];
 
         assert.strictEqual(danglingComment.leading, false);
         assert.strictEqual(danglingComment.trailing, false);
