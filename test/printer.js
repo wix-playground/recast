@@ -579,7 +579,7 @@ describe("printer", function() {
         ""
     ].join("\n");
 
-    it.skip("Statement list whitespace reuse", function() {
+    it("Statement list whitespace reuse", function() {
         var ast = parse(stmtListSpaces);
         var printer = new Printer({ tabWidth: 2 });
         var debugStmt = b.expressionStatement(b.identifier("debugger"));
