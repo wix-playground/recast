@@ -186,6 +186,10 @@ describe("patcher", function() {
         );
 
         var withFooCall = recast.print(twoLineAST).code;
+
+        // Level (somewhat mysterious) difference between esprima
+        withFooCall = withFooCall.charAt(withFooCall.length-1) === ';' ? withFooCall : withFooCall + ';';
+
         assert.strictEqual(withFooCall, [
             "return",
             "foo();"
