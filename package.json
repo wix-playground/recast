@@ -25,7 +25,7 @@
     "debug": "node ./node_modules/mocha/bin/mocha --debug-brk --reporter spec"
   },
   "dependencies": {
-    "ast-types": "~0.7.0",
+    "ast-types": "wix/ast-types#estree-compat",
     "babel-core": "^5.1.13",
     "esprima-fb": "~14001.1.0-dev-harmony-fb",
     "private": "~0.1.5",
