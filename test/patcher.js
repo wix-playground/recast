@@ -187,7 +187,7 @@ describe("patcher", function() {
 
         var withFooCall = recast.print(twoLineAST).code;
 
-        // Level (somewhat mysterious) difference between esprima
+        // Level (somewhat mysterious) difference between esprima and acorn
         withFooCall = withFooCall.charAt(withFooCall.length-1) === ';' ? withFooCall : withFooCall + ';';
 
         assert.strictEqual(withFooCall, [
