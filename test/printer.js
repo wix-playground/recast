@@ -816,7 +816,7 @@ describe("printer", function() {
         assert.strictEqual(pretty, code);
     });
 
-    it("prints trailing commas in function calls", function() {
+    it.skip("prints trailing commas in function calls", function() {
         var code = [
             "call(",
             "  1,",
@@ -856,7 +856,7 @@ describe("printer", function() {
         assert.strictEqual(pretty, code);
     });
 
-    it("prints trailing commas in function definitions", function() {
+    it.skip("prints trailing commas in function definitions", function() {
         var code = [
             "function foo(",
             "  a,",
