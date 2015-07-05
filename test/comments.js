@@ -160,6 +160,38 @@ describe("comments", function() {
         assert.strictEqual(actual, expected);
     });
 
+    var bodyTrailing = [
+        "module.exports = {};",
+        "/**",
+        " * Trailing comment.",
+        " */"
+    ];
+
+    var bodyTrailingExpected = [
+        "module.exports = {};",
+        "/**",
+        " * Trailing comment.",
+        " */"
+    ];
+
+    it("BodyTrailingComments", function() {
+        var code = bodyTrailing.join("\n");
+        var ast = recast.parse(code);
+
+        // Drop all original source information to force reprinting.
+        recast.visit(ast, {
+            visitNode: function(path) {
+                this.traverse(path);
+                path.value.original = null;
+            }
+        });
+
+        var actual = recast.print(ast, { tabWidth: 2 }).code;
+        var expected = bodyTrailingExpected.join("\n");
+
+        assert.strictEqual(actual, expected);
+    });
+
     var paramTrailing = [
         "function foo(bar, baz /* = null */) {",
         "  assert.strictEqual(baz, null);",
@@ -563,6 +595,31 @@ describe("comments", function() {
 
         assert.strictEqual(
             printer.print(ast).code,
+            code
+        );
+    });
+
+    it("should be pretty-printable in illegal positions", function() {
+        var code = [
+            "var sum = function /*anonymous*/(/*...args*/) /*int*/ {",
+            "  // TODO",
+            "};"
+        ].join("\n");
+
+        var ast = recast.parse(code);
+        var funExp = ast.program.body[0].declarations[0].init;
+        n.FunctionExpression.assert(funExp);
+
+        funExp.original = null;
+
+        var comments = funExp.body.comments;
+        assert.strictEqual(comments.length, 4);
+        funExp.id = comments.shift();
+        funExp.params.push(comments.shift());
+        funExp.body.body.push(comments.pop());
+
+        assert.strictEqual(
+            recast.print(ast).code,
             code
         );
     });
